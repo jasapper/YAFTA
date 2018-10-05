@@ -51,7 +51,7 @@ class MealsController extends Controller
             'name' => 'required'
         ]);
 
-        // Create a new Meal, taking advantage of the fact that we've sete
+        // Create a new Meal, taking advantage of the fact that we've set
         //   $name to be mass-assignable.
         $meal = new Meal($request->all());
         $user->meals()->save($meal);
@@ -102,6 +102,9 @@ class MealsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meal = Meal::findOrFail($id);
+        $meal->delete();
+
+        return back();
     }
 }
